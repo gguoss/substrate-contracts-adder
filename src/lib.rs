@@ -4,6 +4,7 @@
 
 #![no_std]
 
+#![feature(lang_items)]
 #[macro_use]
 extern crate parity_codec_derive;
 extern crate parity_codec as codec;
@@ -35,6 +36,8 @@ pub extern fn oom(_: ::core::alloc::Layout) -> ! {
 		intrinsics::abort();
 	}
 }
+
+#[lang = "eh_personality"] extern fn eh_personality() {}
 
 #[derive(Encode, Decode)]
 enum Action {
